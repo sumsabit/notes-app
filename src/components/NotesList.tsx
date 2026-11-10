@@ -210,29 +210,43 @@ viewBox="0 0 24 24" fill="none" stroke="currentColor"
 )}
 {editingNote?.id !== note.id && (
 <div className="absolute right-3 top-3 flex gap-2">
-                    <button onClick={()=>pinNote(note.id)}>
-                      
-                        
-                        {note.isPinned ? ( 
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" 
-                     height="24" viewBox="0 0 24 24" fill="none"
-                      stroke="currentColor" strokeWidth="2" strokeLinecap="round" 
-                      strokeLinejoin="round" className="lucide lucide-bookmark-off
-                       preview-icon">
-                    <path d="M19 19v1a1 1 0 0 1-1.496.868l-4.512-2.578a2 2 0 0 0-1.984 0l-4.512 2.578A1 1 0 0 1 5 20V5"/><path d="m2 2 20 20"/>
-                     <path d="M8.656 3H17a2 2 0 0 1 2 2v8.344"/></svg>
-                        ): (
-                        <svg xmlns="http://www.w3.org/2000/svg"
-                         width="24" height="24" viewBox="0 0 24 24" fill="none"
-                          stroke="currentColor" strokeWidth="2" strokeLinecap="round" 
-                          strokeLinejoin="round" className="lucide lucide-bookmark
-                           preview-icon">
-                         <path d="M17 3a2 2 0 0 1 2 2v15a1 1 0 0 1-1.496.868l-4.512-2.578a2 2 0 0 0-1.984 0l-4.512 2.578A1 1 0 0 1 5 20V5a2 2 0 0 1 2-2z"/></svg>
-                    )}
-
-                    </button>
+                  <button
+  type="button"
+  onClick={() => pinNote(note.id)}
+  title={note.isPinned ? "Unpin note" : "Pin note"}
+>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="20"
+    height="20"
+    viewBox="0 0 24 24"
+    fill={note.isPinned ? "yellow" : "none"}
+   stroke={note.isPinned ? "orange" : "currentColor"}
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
+  </svg>
+</button>
                      
-                    <button onClick={()=>deleteNote(note.id)}>
+                  
+                      <button onClick={()=> archiveNote(note.id)}>
+                        {note.isArchived ? (
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" 
+                          fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" 
+                          strokeLinejoin="round" className="lucide lucide-package-open preview-icon">
+                            <path d="M12 22v-9"/>
+                            <path d="M15.17 2.21a1.67 1.67 0 0 1 1.63 0L21 4.57a1.93 1.93 0 0 1 0 3.36L8.82 14.79a1.655 1.655 0 0 1-1.64 0L3 12.43a1.93 1.93 0 0 1 0-3.36z"/><path d="M20 13v3.87a2.06 2.06 0 0 1-1.11 1.83l-6 3.08a1.93 1.93 0 0 1-1.78 0l-6-3.08A2.06 2.06 0 0 1 4 16.87V13"/>
+                           <path d="M21 12.43a1.93 1.93 0 0 0 0-3.36L8.83 2.2a1.64 1.64 0 0 0-1.63 0L3 4.57a1.93 1.93 0 0 0 0 3.36l12.18 6.86a1.636 1.636 0 0 0 1.63 0z"/></svg>
+                            ) : (
+                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" 
+                              fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" 
+                              stroke-linejoin="round" className="lucide lucide-package preview-icon">
+                              <path d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z"/><path d="M12 22V12"/><polyline points="3.29 7 12 12 20.71 7"/><path d="m7.5 4.27 9 5.15"/></svg>
+                           )}
+                    </button>
+                      <button onClick={()=>deleteNote(note.id)}>
                        <svg xmlns="http://www.w3.org/2000/svg" width="24"
                         height="24" viewBox="0 0 24 24" fill="none" 
                         stroke="currentColor" strokeWidth="2" 
@@ -242,21 +256,6 @@ viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/>
                             <path d="M3 6h18"/>
                        <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
-                    </button>
-                      <button onClick={()=> archiveNote(note.id)}>
-                        {note.isArchived ? (
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" 
-                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" 
-                            stroke-linejoin="round" className="lucide lucide-archive-x preview-icon">
-                                <rect width="20" height="5" x="2" y="3" rx="1"/>
-                                <path d="M4 8v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8"/><path d="m9.5 17 5-5"/><path d="m9.5 12 5 5"/></svg>
-                        ) : (
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" 
-                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                             stroke-linejoin="round" className="lucide lucide-archive preview-icon">
-                                <rect width="20" height="5" x="2" y="3" rx="1"/>
-                            <path d="M4 8v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8"/><path d="M10 12h4"/></svg>
-                        )}
                     </button>
                     </div>
 )}
